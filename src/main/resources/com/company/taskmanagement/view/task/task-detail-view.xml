@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://taskDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="taskDc"
+                  class="com.company.taskmanagement.entity.Task">
+            <fetchPlan extends="_base">
+                <property name="assignee" fetchPlan="_base"/>
+                <property name="project" fetchPlan="_base"/>
+                <property name="subtasks" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="subtasksDc" property="subtasks"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="taskDc">
+            <textField id="nameField" property="name"/>
+            <dateTimePicker id="dueDateField" property="dueDate"/>
+            <entityPicker id="assigneeField" property="assignee">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="projectField" property="project">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <select id="priorityField" property="priority"/>
+        </formLayout>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="subtasksDataGrid.create"/>
+            <button id="editBtn" action="subtasksDataGrid.edit"/>
+            <button id="removeBtn" action="subtasksDataGrid.remove"/>
+        </hbox>
+        <dataGrid id="subtasksDataGrid" dataContainer="subtasksDc" width="100%" minHeight="20em">
+            <columns>
+                <column property="name"/>
+                <column property="estimation"/>
+                <column property="completed"/>
+            </columns>
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/flowui/menu">
+
+    <menu opened="true" id="application" title="msg://com.company.taskmanagement/menu.application.title">
+        <item view="tm_Project.list" title="msg://com.company.taskmanagement.view.project/projectListView.title"/>
+        <item view="tm_User.list" title="msg://com.company.taskmanagement.view.user/UserListView.title"/>
+        <item view="tm_Subtask.list" title="msg://com.company.taskmanagement.view.subtask/subtaskListView.title"/>
+        <item view="tm_Task.list" title="msg://com.company.taskmanagement.view.task/taskListView.title"/>
+    </menu>
+</menu-config>
